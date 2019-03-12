@@ -1,0 +1,5 @@
+<nz-card>
+  <app-view-grid-container>
+    <app-view-grid *ngFor="let item of list" [vgLabel]="item?.title">{{item.value | myDatePipe}}</app-view-grid>
+  </app-view-grid-container>
+</nz-card>

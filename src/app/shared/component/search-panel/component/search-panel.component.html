@@ -1,0 +1,154 @@
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" class="search__form" (ngSubmit)="searchForm()">
+    <div nz-row [nzGutter]="32">
+        <div nz-col [nzXs]="defaultColumn.xs" [nzSm]="defaultColumn.sm" [nzMd]="defaultColumn.md"
+             [nzLg]="defaultColumn.lg" [nzXl]="defaultColumn.xl" [nzXXl]="defaultColumn.xxl" [nzSpan]="2"
+             *ngFor="let opt of options;let i = index;"
+             [style.display]="(opt.advancedSearch==undefined || opt.advancedSearch==isAdvancedSearch)?'block':'none'">
+            <nz-form-item class="ant-row app-form-item">
+                <nz-form-label class="app-form-label" [nzFor]="'field'+ i">
+                    {{opt.labelTitle}}
+                </nz-form-label>
+                <nz-form-control class="app-form-control">
+                    <div>
+                        <span>
+
+                    <ng-container [ngSwitch]="opt.type">
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.input">
+                            <input class="width_100" nz-input [placeholder]="opt.placeholder" maxlength="50"
+                                   [formControlName]="opt.name"
+                                   nzSize="default"
+                                   [attr.id]="'field'+i">
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.readOnlyInput">
+                            <input class="width_100" nz-input [placeholder]="opt.placeholder" readonly
+                                   [formControlName]="opt.name"
+                                   nzSize="default"
+                                   (click)="opt.selectedChange && opt.selectedChange($event)"
+                                   [attr.id]="'field'+i">
+                        </ng-container>
+                        <!--<ng-container *ngSwitchCase="SearchPanelOptionType.inputNumber">-->
+                        <!--<nz-input-number style="width: 100%;" [nzMin]="1" [nzMax]="10"-->
+                        <!--[nzStep]="1"></nz-input-number>-->
+                        <!--</ng-container>-->
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.timePicker">
+                            <nz-time-picker class="width_100"
+                                            nzSize="default"
+                                            [nzDefaultOpenValue]="opt.defaultValue"
+                                            [formControlName]="opt.name" [nzPlaceHolder]="opt.placeholder"
+                                            (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                            [attr.id]="'field'+i"></nz-time-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.datePicker">
+                            <nz-date-picker class="width_100" [formControlName]="opt.name" nzSize="default"
+                                            [nzPlaceHolder]="opt.placeholder"
+                                            [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                            (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                            [attr.id]="'field'+i"></nz-date-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.datePickerWithTime">
+                            <nz-date-picker class="width_100" [formControlName]="opt.name" nzSize="default"
+                                            [nzPlaceHolder]="opt.placeholder"
+                                            [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                            (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                            [attr.id]="'field'+i" nzShowTime></nz-date-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.datePickerRange">
+                            <nz-range-picker class="width_100" [formControlName]="opt.name" nzSize="default"
+                                             [nzPlaceHolder]="opt.placeholder"
+                                             [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                             (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                             [attr.id]="'field'+i"></nz-range-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.weekPicker">
+                            <nz-week-picker class="width_100" nzSize="default"
+                                            [formControlName]="opt.name" [nzPlaceHolder]="opt.placeholder"
+                                            [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                            (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                            [attr.id]="'field'+i"></nz-week-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.monthPicker">
+                            <nz-month-picker class="width_100" nzSize="default"
+                                             [formControlName]="opt.name" [nzPlaceHolder]="opt.placeholder"
+                                             [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                             (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                             [attr.id]="'field'+i"></nz-month-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.monthPickerRange">
+                            <nz-range-picker class="width_100" [formControlName]="opt.name" nzSize="default"
+                                             nzFormat="yyyy-MM"
+                                             [nzPlaceHolder]="opt.placeholder"
+                                             [nzDisabledDate]="opt.disableDate || disableAllDate"
+                                             (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                             [attr.id]="'field'+i"></nz-range-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.yearPicker">
+                            <nz-year-picker class="width_100" nzSize="default"
+                                            [formControlName]="opt.name" [nzPlaceHolder]="opt.placeholder"
+                                            (ngModelChange)="opt.selectedChange && opt.selectedChange($event)"
+                                            [attr.id]="'field'+i"></nz-year-picker>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.select">
+                            <nz-select class="width_100" nzShowSearch nzAllowClear nzSize="default"
+                                       nzNotFoundContent="列表为空"
+                                       [formControlName]="opt.name"
+                                       [nzPlaceHolder]="opt.placeholder"
+                                       (ngModelChange)="opt.selectedChange && opt.selectedChange($event)">
+                                <nz-option *ngFor="let o of opt.selectOptions" [nzLabel]="o.label"
+                                           [nzValue]="o.value"></nz-option>
+                            </nz-select>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.multipleSelect">
+                            <nz-select class="width_100" nzShowSearch nzAllowClear nzSize="default"
+                                       nzNotFoundContent="列表为空"
+                                       nzMode="multiple"
+                                       [formControlName]="opt.name"
+                                       [nzPlaceHolder]="opt.placeholder"
+                                       (ngModelChange)="opt.selectedChange && opt.selectedChange($event)">
+                                <nz-option *ngFor="let o of opt.selectOptions" [nzLabel]="o.label"
+                                           [nzValue]="o.value"></nz-option>
+                            </nz-select>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="SearchPanelOptionType.customTemplate">
+                            <ng-template
+                                [ngTemplateOutlet]="templateResource.getTemplate(opt.customTemplateName) || defaultTemplate"
+                                [ngTemplateOutletContext]="{formControlName:opt.name,item:opt, $implicit:opt}"></ng-template>
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            <input class="width_100" nz-input [placeholder]="opt.placeholder" maxlength="50"
+                                   [formControlName]="opt.name"
+                                   nzSize="default"
+                                   [attr.id]="'field'+i">
+                        </ng-container>
+                    </ng-container>
+                    </span>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <nz-col [nzSpan]="isAdvancedSearch ? 24 : 8" [style.text-right]="isAdvancedSearch">
+            <nz-form-item class="ant-row ant-form-item app-search-row">
+                <button nz-button type="submit" [nzLoading]="loading" [nzType]="'primary'">查询</button>
+                <button nz-button type="reset" *ngIf="!disableReset" (click)="resetForm()" class="mx-sm">重置</button>
+                <a (click)="toggleCollapse()" *ngIf="!isDisableAdvancedSearch">
+                    {{isAdvancedSearch ? '收起' : '展开'}}
+                    <i class="anticon" [class.anticon-down]="!isAdvancedSearch"
+                       [class.anticon-up]="isAdvancedSearch"></i>
+                </a>
+            </nz-form-item>
+        </nz-col>
+    </div>
+    <!--<div nz-row>-->
+    <!--<div nz-col [nzSpan]="24" style="text-align: right;">-->
+    <!--<button nz-button [nzType]="'primary'" (click)="searchForm()">查询</button>-->
+    <!--<button nz-button *ngIf="!disableReset" (click)="resetForm()">重置</button>-->
+    <!--<a style="margin-left:8px;font-size:12px;" (click)="toggleCollapse()" *ngIf="!isDisableAdvancedSearch">-->
+    <!--{{isAdvancedSearch?'查询':'高级查询'}}-->
+    <!--<i class="anticon" [class.anticon-down]="!isAdvancedSearch" [class.anticon-up]="isAdvancedSearch"></i>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+</form>
+
+<ng-template #defaultTemplate name="defaultTemplate">
+    <span>这是默认模板，请传入模板引用变量来更换此内容</span>
+</ng-template>

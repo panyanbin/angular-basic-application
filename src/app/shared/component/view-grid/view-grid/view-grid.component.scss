@@ -1,0 +1,60 @@
+$vg-bottom: 16px;
+$vg-label-color: rgba(0, 0, 0, 0.5);
+$vg-detail-color: rgba(0, 0, 0, 0.65);
+$vg-default-text: '-';
+
+.vg__item{
+    &-fixed {
+        display: flex;
+        .vg__label {
+            text-align: right;
+            flex: 0 0 auto;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .vg__detail {
+            flex: 1 0 0;
+        }
+    }
+}
+
+
+.vg__label {
+    line-height: 22px;
+    padding-bottom: $vg-bottom;
+    margin-right: 8px;
+    color: $vg-label-color;
+    white-space: nowrap;
+    display: table-cell;
+    &:not(.vg__label-empty) {
+        &:after {
+            content: ':';
+            margin: 0 8px 0 2px;
+            position: relative;
+            top: -0.5px;
+        }
+    }
+}
+
+.vg__detail {
+    line-height: 22px;
+    width: 100%;
+    padding-bottom: $vg-bottom;
+    color: $vg-detail-color;
+    display: table-cell;
+    word-break: break-all;
+}
+
+//&__default {
+//    &:before {
+//        content: $vg-default-text;
+//    }
+//}
+
+//.vg__label {
+//    color: rgba(0, 0, 0, 0.85);
+//}
+//
+//.vg__detail {
+//    color: rgba(0, 0, 0, 0.65);
+//}

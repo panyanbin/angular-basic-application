@@ -1,0 +1,8 @@
+{
+    "/": {
+        "target": "https://www.google.com/",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
+

@@ -1,0 +1,58 @@
+<nz-table
+    #dynamicTable
+    [nzData]="dataSet"
+    [nzBordered]="bordered"
+    [nzLoading]="!!loading"
+    [nzFrontPagination]="false"
+    [nzShowPagination]="!disablePagination"
+    [nzFooter]="null"
+    [nzTitle]="title || null"
+    [nzSize]="'default'"
+    [nzTotal]="total"
+    [(nzPageIndex)]="page"
+    [(nzPageSize)]="size"
+    (nzPageIndexChange)="_pageChange()"
+    (nzPageSizeChange)="_sizeChange()">
+    <thead>
+    <tr>
+        <ng-container *ngFor="let c of column;let i = index">
+            <ng-template #renderTitle>
+                <th [ngStyle]="c.style ? c.style : {}">
+                    <ng-template [ngTemplateOutlet]="getTemplate(c.titleRender,true)"
+                                 [ngTemplateOutletContext]="{index: index , title: c, $implicit: c}"></ng-template>
+                </th>
+            </ng-template>
+            <ng-container *ngIf="!c.titleRender;else renderTitle">
+                <th [ngStyle]="c.style ? c.style : {}" [nzWidth]="c.width" nzShowExpand *ngIf="expandable"></th>
+                <th [ngStyle]="c.style ? c.style : {}" [nzWidth]="c.width" *ngIf="c.checkBox" nzShowCheckbox [(nzChecked)]="allChecked"
+                    [nzIndeterminate]="indeterminate"
+                    (nzCheckedChange)="checkAll($event)"></th>
+                <th [ngStyle]="c.style ? c.style : {}" [nzWidth]="c.width" *ngIf="!c.checkBox">{{c.title}}</th>
+            </ng-container>
+        </ng-container>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of dynamicTable.data;let i = index;">
+        <ng-container *ngFor="let c of column">
+            <ng-template #renderRow>
+                <td [ngStyle]="c.style ? c.style : {}">
+                    <ng-template [ngTemplateOutlet]="getTemplate(c.render)"
+                                 [ngTemplateOutletContext]="{index: index , item: data, $implicit: data}"></ng-template>
+                </td>
+            </ng-template>
+            <ng-container *ngIf="!c.render;else renderRow">
+                <td nzShowExpand *ngIf="expandable"></td>
+                <td [ngStyle]="c.style ? c.style : {}" *ngIf="c.checkBox" nzShowCheckbox [(nzChecked)]="data.checked"
+                    (nzCheckedChange)="refreshStatus()"></td>
+                <td [ngStyle]="c.style ? c.style : {}" *ngIf="!c.checkBox">
+                    <ng-container *ngIf="c.onClick;else textContent">
+                        <a (click)="c.onClick(data, i, dynamicTable.data, c.key)">{{parseValue(c, data, i)}}</a>
+                    </ng-container>
+                    <ng-template #textContent>{{parseValue(c, data, i)}}</ng-template>
+                </td>
+            </ng-container>
+        </ng-container>
+    </tr>
+    </tbody>
+</nz-table>

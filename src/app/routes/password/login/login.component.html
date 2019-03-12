@@ -1,0 +1,38 @@
+<div class="body">
+    <div class="container">
+        <div class="logo">
+            <img src="https://ng.ant.design/assets/img/zorro.svg">
+        </div>
+        <h2>登录平台系统</h2>
+        <form nz-from (ngSubmit)="submitForm()">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-input-group [nzPrefix]="prefixUser" nzSize="large">
+                        <input type="text" nz-input placeholder="请输入用户名（随便输入）" nzSize="large" [(ngModel)]="user.userName"
+                            name="userName" #userName='ngModel' required>
+                    </nz-input-group>
+                    <nz-form-explain *ngIf="userName.dirty && !user.userName">账号不能为空！</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-input-group [nzPrefix]="prefixLock" nzSize="large">
+                        <input type="password" nz-input placeholder="请输入密码（随便输入）" nzSize="large" [(ngModel)]="user.password" name="password"
+                            #password='ngModel' required>
+                    </nz-input-group>
+                    <nz-form-explain *ngIf="password.dirty && !user.password">密码不能为空！</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control>
+                    <button nz-button [nzType]="'primary'" nzSize="large">登录</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+        <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+        <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+        <p>
+            Copyright © 2019 xxx公司.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+[
+  {
+    "text": "主页",
+    "icon": "home",
+    "link": "/main/dashboard/info"
+  },
+  {
+    "text": "demo",
+    "icon": "book",
+    "badgeDot": false,
+    "disable": false,
+    "children": [
+      {
+        "text": "搜索面板",
+        "link": "/main/demo/search"
+      },
+      {
+        "text": "表格数据",
+        "link": "/main/demo/table"
+      },
+      {
+        "text": "数据项",
+        "link": "/main/demo/viewGrid"
+      }
+    ]
+  }
+]

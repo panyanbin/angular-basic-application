@@ -1,0 +1,6 @@
+<div class="vg__label" [class.vg__label-empty]="!vgLabel" [style.width.px]="parent.labelWidth">
+    <ng-container *ngIf="labelTemplate==null;else labelTemplate">{{vgLabel}}</ng-container>
+</div>
+<div class="vg__detail">
+    <ng-content></ng-content>
+</div>

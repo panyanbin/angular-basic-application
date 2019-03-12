@@ -1,0 +1,23 @@
+<div class="default__header-logo default__header-logo-{{settings.layout.collapsed ? 'collapsed' : 'expanded'}}">
+    <a [routerLink]="['/']"
+       class="default__header-logo-link">
+        <img class="default__header-logo-expanded" src="https://ng-alain.github.io/ng-alain/assets/logo-full.svg" style="max-height:40px;"/>
+        <img class="default__header-logo-collapsed" src="https://ng-alain.github.io/ng-alain/assets/logo.svg" style="max-height:30px;"/>
+    </a>
+</div>
+<div class="default__nav-wrap">
+    <dl class="default__nav">
+        <!-- Menu -->
+        <dd>
+            <div class="default__nav-item" (click)="toggleCollapsed()">
+                <i nz-icon type="menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
+            </div>
+        </dd>
+    </dl>
+    <!--<header-search class="default__search" [toggleChange]="searchToggleStatus"></header-search>-->
+    <dl class="default__nav">
+        <dd class="hidden-mobile">
+            <app-header-user></app-header-user>
+        </dd>
+    </dl>
+</div>

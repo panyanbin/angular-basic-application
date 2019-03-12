@@ -1,0 +1,17 @@
+<nz-layout>
+    <nz-header class="app-header">
+        <app-header class="default-header"></app-header>
+    </nz-header>
+    <nz-layout class="app-content-layout">
+        <nz-sider
+            class="app-sider scrollbar"
+            [nzCollapsed]="settings.layout.collapsed" (nzCollapsedChange)="toggleCollapsed($event)"
+            [nzBreakpoint]="'lg'"
+            [nzWidth]="200">
+          <app-menu></app-menu>
+        </nz-sider>
+        <section class="app-content" [class.collapsed]="settings.layout.collapsed">
+            <router-outlet></router-outlet>
+        </section>
+    </nz-layout>
+</nz-layout>

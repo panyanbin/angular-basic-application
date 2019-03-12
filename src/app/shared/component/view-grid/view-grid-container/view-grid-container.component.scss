@@ -1,0 +1,12 @@
+$vg-bottom: 16px;
+
+::ng-deep{
+    .vg__container {
+        display: block;
+        // offset the padding-bottom of last row
+        .nz-row {
+            margin-bottom: -$vg-bottom;
+            overflow: hidden;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+<nz-card>
+  <app-table #table [column]="column" [dataSet]="dataSet" [total]="58" [page]="page" (searchDataEvent)="onPage($event)"
+             [loading]="loading">
+    <ng-template table-row-ref="age" let-item="item" let-index="index">
+      这个用模板渲染处理的年龄：{{item.age}}
+    </ng-template>
+  </app-table>
+
+</nz-card>

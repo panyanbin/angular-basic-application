@@ -1,0 +1,69 @@
+//.logo {
+//    height: 32px;
+//    //background: rgba(255, 255, 255, .2);
+//    margin: 16px;
+//}
+
+.app-menu {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.app-header {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 2px 8px #f0f1f2;
+    z-index: 19;
+
+    .default-header {
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        width: 100%;
+        height: 64px;
+        background-color: #1890ff;
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+        z-index: 19;
+    }
+}
+
+.app-content-layout {
+    margin-top: 65px;
+    padding-bottom: 0;
+    //padding: 0 50px;
+    //background: #fff;
+
+    .app-sider {
+        position: fixed;
+        top: 65px;
+        left: 0;
+        bottom: 0;
+        overflow: auto;
+        background: #fff;
+        //border-right: 1px solid #efefef;
+    }
+
+    .app-content {
+        width: 100%;
+        min-height: calc(100vh - 94px);
+        //min-height: calc(100vh - 140px);
+        margin: 0 24px 24px 224px;
+        transition: all .2s ease;
+
+        &.collapsed {
+            margin-left: 104px;
+        }
+    }
+}
+
+::ng-deep {
+    app-menu {
+        [nz-menu] {
+            border: none;
+        }
+    }
+}
+
+

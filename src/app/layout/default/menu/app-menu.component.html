@@ -1,0 +1,23 @@
+<ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="settingsService.layout.collapsed">
+    <ng-container *ngFor="let m of menu">
+        <ng-container *ngIf="!m.hide">
+            <!--存在子项的菜单栏-->
+            <li nz-submenu *ngIf="m.children && m.children.length > 0;else menuItem" [(nzOpen)]="m.open"
+                [nzDisabled]="m.disable"
+                [class.menu-selected]="m.selected">
+                <div title>
+                    <!--单个项的信息-->
+                    <app-menu-item [item]="m"></app-menu-item>
+                </div>
+                <app-sub-menu [subMenu]="m" (menuClickEvent)="onMenuClick($event)"></app-sub-menu>
+            </li>
+            <ng-template #menuItem>
+                <li nz-menu-item
+                    [nzDisabled]="m.disable" [nzSelected]="m.selected" (click)="onMenuClick(m)">
+                    <app-menu-item [item]="m"></app-menu-item>
+                </li>
+            </ng-template>
+
+        </ng-container>
+    </ng-container>
+</ul>

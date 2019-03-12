@@ -1,0 +1,21 @@
+<ul>
+    <ng-container *ngFor="let m of subMenu.children">
+        <!--对于hide为true的隐藏了-->
+        <ng-container *ngIf="!m.hide">
+            <li nz-submenu *ngIf="m.children && m.children.length > 0;else menuItem" [(nzOpen)]="m.open"
+                [nzDisabled]="m.disable"
+                [class.menu-selected]="m.selected">
+                <div title>
+                    <app-menu-item [item]="m"></app-menu-item>
+                </div>
+                <app-sub-menu [subMenu]="m" (menuClickEvent)="menuClickEvent.emit($event)"></app-sub-menu>
+            </li>
+            <ng-template #menuItem>
+                <li nz-menu-item [nzSelected]="m.selected" (click)="menuClickEvent.emit(m)">
+                    <app-menu-item [item]="m"></app-menu-item>
+                </li>
+            </ng-template>
+
+        </ng-container>
+    </ng-container>
+</ul>

@@ -1,0 +1,5 @@
+<nz-badge [nzStatus]="item.badgeStatus" [nzCount]="+item.badgeCount || 0"
+          [nzDot]="item.badgeDot && !item.badgeCount">
+    <i *ngIf="item.icon" nz-icon [type]="item.icon"></i>
+    <span [class]="item.textClass || ''">{{item.text}}</span>
+</nz-badge>

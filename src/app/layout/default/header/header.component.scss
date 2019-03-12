@@ -1,0 +1,112 @@
+.default__header-logo {
+    margin-left: -16px;
+    width: 200px;
+    transition: width 0.2s cubic-bezier(0.25, 0, 0.15, 1);
+}
+
+.default__header-logo-link {
+    display: block;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.default__header-logo-expanded,
+.default__header-logo-collapsed {
+    vertical-align: middle;
+    max-width: 100%;
+    animation: fadeIn 1s;
+}
+
+.default__header-logo-collapsed {
+    display: none;
+}
+
+.default__header-logo-expanded {
+    display: inline;
+}
+
+.default__nav-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //margin-top: 10px;
+}
+
+.default__nav {
+    margin: 0;
+
+    .union-name-area {
+        position: relative;
+        font-size: 18px;
+        margin-left: 10px;
+        color: #fff;
+        cursor: default;
+        user-select: none;
+
+        .union-name-area-detail {
+            display: none;
+            position: absolute;
+            top: 65px;
+            width: 80vw;
+
+            .union-name-area-text{
+                display: inline-block;
+                background: rgba(100, 98, 98, .95);
+                font-size: 16px;
+                line-height: 20px;
+                padding: 10px;
+                //max-width: 800px;
+                //word-break: keep-all;
+            }
+        }
+
+        &:hover {
+            .union-name-area-detail {
+                display: block;
+            }
+        }
+    }
+}
+
+.default__nav > li,
+.default__nav > dd {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.default__nav-item,
+.default__nav nz-badge {
+    color: #fff;
+}
+
+.default__nav-item {
+    display: block;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 100%;
+    padding: 8px 2px;
+    min-width: 50px;
+    transition: background-color 300ms;
+    cursor: pointer;
+    outline: none;
+}
+
+.default__nav-item:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.default__nav-item > i,
+.default__nav-item-icon {
+    font-size: 18px !important;
+    transform: none !important;
+}
+
+@media (max-width: 767px) {
+    .hidden-mobile {
+        display: none !important;
+    }
+}
